@@ -2,6 +2,27 @@
 import { Vue3Marquee } from "vue3-marquee";
 import SWenLogo from "./components/SWenLogo.vue";
 import SwenBg from "./components/SwenBg.vue";
+import RateSmth from "./components/RateSmth.vue";
+import { computed, ref } from "vue";
+import GavnoEbanoe from "./components/GavnoEbanoe.vue";
+
+const isDescribing = ref(false);
+const description = ref("");
+const log = (...arr: any[]) => console.log(...arr);
+const handleDescribe = (e: any) => {
+  const target = e.target;
+  const value = target.innerText;
+  description.value = value;
+  isDescribing.value = false;
+};
+
+const amountEur = ref(0);
+const asdd = computed(() => amountEur.value + "€");
+const onAmountChange = (e: any) => {
+  let sspf = e.target.value;
+  const asd = sspf.replace("€", "");
+  amountEur.value = +asd;
+};
 </script>
 
 <template>
@@ -37,7 +58,7 @@ import SwenBg from "./components/SwenBg.vue";
         </svg>
       </div>
     </div>
-    <div class="h-11 relative overflow-hidden">
+    <div class="h-11 relative overflow-hidden select-none cursor-pointer">
       <SwenBg class="absolute top-0 mt-[-18%] left-0 w-[110%]" />
       <Vue3Marquee class="!h-11">
         <div class="relative flex h-6 items-center custom-shadow">
@@ -62,7 +83,7 @@ import SwenBg from "./components/SwenBg.vue";
     </div>
   </header>
   <main>
-    <div>
+    <div class="mb-3">
       <div class="mt-4 mb-5 flex justify-between items-center">
         <div class="rounded-r-full overflow-hidden">
           <img src="./assets/left-waiter.jpg" />
@@ -90,98 +111,84 @@ import SwenBg from "./components/SwenBg.vue";
         <span class="font-medium text-[15px]/[24px]">
           Enter amount of tips
         </span>
-        <span
-          class="absolute top-[41.53px] font-bold text-[34px]/[36px] text-black opacity-10"
-        >
-          0€
-        </span>
+        <div class="flex justify-center absolute top-[41.53px] w-full">
+          <div class="flex-grow basis-full" />
+
+          <input
+            class="flex-shrink basis-0 w-min font-bold text-[34px]/[36px] inline focus:outline-none text-center focus:text-[#0F0A2F] focus:opacity-100 placeholder:text-black placeholder:opacity-10"
+            placeholder="0€"
+            :value="amountEur > 0 ? asdd : ''"
+            @input="onAmountChange"
+          />
+          <div class="flex-grow" />
+        </div>
       </div>
       <div class="mt-2 mx-5 flex flex-nowrap h-[34px] gap-1 items-stretch">
         <div
-          class="flex flex-grow items-center justify-center bg-white rounded-xl flex-1"
+          class="flex cursor-pointer flex-grow items-center justify-center rounded-xl flex-1"
+          :class="
+            amountEur === 2
+              ? 'bg-[#9771FD] text-white'
+              : 'bg-white text-[#1F2A37]'
+          "
+          @click="amountEur = 2"
         >
-          <span class="text-[#1F2A37] font-semibold text-[13px]/[18px]">2</span>
+          <span class="font-semibold text-[13px]/[18px]">2</span>
         </div>
         <div
-          class="flex flex-grow items-center justify-center bg-white rounded-xl flex-1"
+          class="flex cursor-pointer flex-grow items-center justify-center rounded-xl flex-1"
+          :class="
+            amountEur === 5
+              ? 'bg-[#9771FD] text-white'
+              : 'bg-white text-[#1F2A37]'
+          "
+          @click="amountEur = 5"
         >
-          <span class="text-[#1F2A37] font-semibold text-[13px]/[18px]">5</span>
+          <span class="font-semibold text-[13px]/[18px]">5</span>
         </div>
         <div
-          class="flex flex-grow items-center justify-center bg-white rounded-xl flex-1"
+          class="flex cursor-pointer flex-grow items-center justify-center rounded-xl flex-1"
+          :class="
+            amountEur === 100
+              ? 'bg-[#9771FD] text-white'
+              : 'bg-white text-[#1F2A37]'
+          "
+          @click="amountEur = 100"
         >
-          <span class="text-[#1F2A37] font-semibold text-[13px]/[18px]"
-            >100</span
-          >
+          <span class="font-semibold text-[13px]/[18px]">100</span>
         </div>
       </div>
     </div>
-    <div class="pt-3 mx-5">
-      <div class="flex items-center gap-2 flex-nowrap">
-        <hr class="flex-grow flex-shrink border-[#9771FD]" />
-        <span class="text-[#0F0A2F] font-medium text-[15px]/[24px]"
-          >Rate your experience</span
+    <div class="mx-5 flex flex-col gap-4">
+      <RateSmth name="Rate your experience" />
+      <RateSmth name="Rate Service" />
+      <div class="flex flex-col gap-3 items-center">
+        <span class="font-medium text-black text-[15px]/[20px]"
+          >What did you like?</span
         >
-        <hr class="flex-grow flex-shrink border-[#9771FD]" />
+        <div class="flex flex-nowrap w-full gap-3">
+          <GavnoEbanoe />
+          <GavnoEbanoe />
+          <GavnoEbanoe />
+          <GavnoEbanoe />
+        </div>
       </div>
-      <div
-        class="mt-3 h-[68px] bg-white rounded-[20px] flex items-center justify-center gap-4"
-      >
-        <svg
-          class="h-9 w-9"
-          viewBox="0 0 37 36"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+      <div class="flex flex-col gap-3 items-center">
+        <span class="font-medium text-black text-[15px]/[20px]"
+          >Share your fedback</span
         >
-          <path
-            d="M33.4905 13.8513C33.3958 13.5769 33.2235 13.3359 32.9945 13.1575C32.7655 12.9791 32.4897 12.871 32.2005 12.8463L23.6655 11.6013L19.8405 3.84626C19.7177 3.59266 19.5259 3.37878 19.2872 3.22912C19.0484 3.07947 18.7723 3.0001 18.4905 3.0001C18.2087 3.0001 17.9326 3.07947 17.6939 3.22912C17.4551 3.37878 17.2633 3.59266 17.1405 3.84626L13.3155 11.5863L4.78052 12.8463C4.5029 12.8857 4.24191 13.0022 4.02714 13.1825C3.81238 13.3628 3.65246 13.5997 3.56552 13.8663C3.48594 14.1268 3.4788 14.404 3.54486 14.6683C3.61093 14.9326 3.74771 15.1739 3.94052 15.3663L10.1355 21.3663L8.63552 29.8863C8.58197 30.1675 8.61001 30.4581 8.71633 30.7239C8.82264 30.9897 9.0028 31.2196 9.23552 31.3863C9.46235 31.5484 9.72988 31.6441 10.0081 31.6627C10.2863 31.6812 10.5642 31.6219 10.8105 31.4913L18.4905 27.4863L26.1405 31.5063C26.351 31.625 26.5888 31.6871 26.8305 31.6863C27.1483 31.6874 27.4581 31.5876 27.7155 31.4013C27.9482 31.2346 28.1284 31.0047 28.2347 30.7389C28.341 30.4731 28.3691 30.1825 28.3155 29.9013L26.8155 21.3813L33.0105 15.3813C33.2271 15.1978 33.3872 14.9566 33.4721 14.6858C33.5571 14.415 33.5635 14.1256 33.4905 13.8513Z"
-            fill="#CBD1D7"
-          />
-        </svg>
-        <svg
-          class="h-9 w-9"
-          viewBox="0 0 37 36"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+        <div
+          class="rounded-[20px] w-full bg-white p-[20px] text-[#808191] font-normal text-[17px]/[24px] min-h-[104px] focus:outline-none"
+          contenteditable
+          @focus="isDescribing = true"
+          @blur="handleDescribe"
         >
-          <path
-            d="M33.4905 13.8513C33.3958 13.5769 33.2235 13.3359 32.9945 13.1575C32.7655 12.9791 32.4897 12.871 32.2005 12.8463L23.6655 11.6013L19.8405 3.84626C19.7177 3.59266 19.5259 3.37878 19.2872 3.22912C19.0484 3.07947 18.7723 3.0001 18.4905 3.0001C18.2087 3.0001 17.9326 3.07947 17.6939 3.22912C17.4551 3.37878 17.2633 3.59266 17.1405 3.84626L13.3155 11.5863L4.78052 12.8463C4.5029 12.8857 4.24191 13.0022 4.02714 13.1825C3.81238 13.3628 3.65246 13.5997 3.56552 13.8663C3.48594 14.1268 3.4788 14.404 3.54486 14.6683C3.61093 14.9326 3.74771 15.1739 3.94052 15.3663L10.1355 21.3663L8.63552 29.8863C8.58197 30.1675 8.61001 30.4581 8.71633 30.7239C8.82264 30.9897 9.0028 31.2196 9.23552 31.3863C9.46235 31.5484 9.72988 31.6441 10.0081 31.6627C10.2863 31.6812 10.5642 31.6219 10.8105 31.4913L18.4905 27.4863L26.1405 31.5063C26.351 31.625 26.5888 31.6871 26.8305 31.6863C27.1483 31.6874 27.4581 31.5876 27.7155 31.4013C27.9482 31.2346 28.1284 31.0047 28.2347 30.7389C28.341 30.4731 28.3691 30.1825 28.3155 29.9013L26.8155 21.3813L33.0105 15.3813C33.2271 15.1978 33.3872 14.9566 33.4721 14.6858C33.5571 14.415 33.5635 14.1256 33.4905 13.8513Z"
-            fill="#CBD1D7"
-          />
-        </svg>
-        <svg
-          class="h-9 w-9"
-          viewBox="0 0 37 36"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M33.4905 13.8513C33.3958 13.5769 33.2235 13.3359 32.9945 13.1575C32.7655 12.9791 32.4897 12.871 32.2005 12.8463L23.6655 11.6013L19.8405 3.84626C19.7177 3.59266 19.5259 3.37878 19.2872 3.22912C19.0484 3.07947 18.7723 3.0001 18.4905 3.0001C18.2087 3.0001 17.9326 3.07947 17.6939 3.22912C17.4551 3.37878 17.2633 3.59266 17.1405 3.84626L13.3155 11.5863L4.78052 12.8463C4.5029 12.8857 4.24191 13.0022 4.02714 13.1825C3.81238 13.3628 3.65246 13.5997 3.56552 13.8663C3.48594 14.1268 3.4788 14.404 3.54486 14.6683C3.61093 14.9326 3.74771 15.1739 3.94052 15.3663L10.1355 21.3663L8.63552 29.8863C8.58197 30.1675 8.61001 30.4581 8.71633 30.7239C8.82264 30.9897 9.0028 31.2196 9.23552 31.3863C9.46235 31.5484 9.72988 31.6441 10.0081 31.6627C10.2863 31.6812 10.5642 31.6219 10.8105 31.4913L18.4905 27.4863L26.1405 31.5063C26.351 31.625 26.5888 31.6871 26.8305 31.6863C27.1483 31.6874 27.4581 31.5876 27.7155 31.4013C27.9482 31.2346 28.1284 31.0047 28.2347 30.7389C28.341 30.4731 28.3691 30.1825 28.3155 29.9013L26.8155 21.3813L33.0105 15.3813C33.2271 15.1978 33.3872 14.9566 33.4721 14.6858C33.5571 14.415 33.5635 14.1256 33.4905 13.8513Z"
-            fill="#CBD1D7"
-          />
-        </svg>
-        <svg
-          class="h-9 w-9"
-          viewBox="0 0 37 36"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M33.4905 13.8513C33.3958 13.5769 33.2235 13.3359 32.9945 13.1575C32.7655 12.9791 32.4897 12.871 32.2005 12.8463L23.6655 11.6013L19.8405 3.84626C19.7177 3.59266 19.5259 3.37878 19.2872 3.22912C19.0484 3.07947 18.7723 3.0001 18.4905 3.0001C18.2087 3.0001 17.9326 3.07947 17.6939 3.22912C17.4551 3.37878 17.2633 3.59266 17.1405 3.84626L13.3155 11.5863L4.78052 12.8463C4.5029 12.8857 4.24191 13.0022 4.02714 13.1825C3.81238 13.3628 3.65246 13.5997 3.56552 13.8663C3.48594 14.1268 3.4788 14.404 3.54486 14.6683C3.61093 14.9326 3.74771 15.1739 3.94052 15.3663L10.1355 21.3663L8.63552 29.8863C8.58197 30.1675 8.61001 30.4581 8.71633 30.7239C8.82264 30.9897 9.0028 31.2196 9.23552 31.3863C9.46235 31.5484 9.72988 31.6441 10.0081 31.6627C10.2863 31.6812 10.5642 31.6219 10.8105 31.4913L18.4905 27.4863L26.1405 31.5063C26.351 31.625 26.5888 31.6871 26.8305 31.6863C27.1483 31.6874 27.4581 31.5876 27.7155 31.4013C27.9482 31.2346 28.1284 31.0047 28.2347 30.7389C28.341 30.4731 28.3691 30.1825 28.3155 29.9013L26.8155 21.3813L33.0105 15.3813C33.2271 15.1978 33.3872 14.9566 33.4721 14.6858C33.5571 14.415 33.5635 14.1256 33.4905 13.8513Z"
-            fill="#CBD1D7"
-          />
-        </svg>
-        <svg
-          class="h-9 w-9"
-          viewBox="0 0 37 36"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M33.4905 13.8513C33.3958 13.5769 33.2235 13.3359 32.9945 13.1575C32.7655 12.9791 32.4897 12.871 32.2005 12.8463L23.6655 11.6013L19.8405 3.84626C19.7177 3.59266 19.5259 3.37878 19.2872 3.22912C19.0484 3.07947 18.7723 3.0001 18.4905 3.0001C18.2087 3.0001 17.9326 3.07947 17.6939 3.22912C17.4551 3.37878 17.2633 3.59266 17.1405 3.84626L13.3155 11.5863L4.78052 12.8463C4.5029 12.8857 4.24191 13.0022 4.02714 13.1825C3.81238 13.3628 3.65246 13.5997 3.56552 13.8663C3.48594 14.1268 3.4788 14.404 3.54486 14.6683C3.61093 14.9326 3.74771 15.1739 3.94052 15.3663L10.1355 21.3663L8.63552 29.8863C8.58197 30.1675 8.61001 30.4581 8.71633 30.7239C8.82264 30.9897 9.0028 31.2196 9.23552 31.3863C9.46235 31.5484 9.72988 31.6441 10.0081 31.6627C10.2863 31.6812 10.5642 31.6219 10.8105 31.4913L18.4905 27.4863L26.1405 31.5063C26.351 31.625 26.5888 31.6871 26.8305 31.6863C27.1483 31.6874 27.4581 31.5876 27.7155 31.4013C27.9482 31.2346 28.1284 31.0047 28.2347 30.7389C28.341 30.4731 28.3691 30.1825 28.3155 29.9013L26.8155 21.3813L33.0105 15.3813C33.2271 15.1978 33.3872 14.9566 33.4721 14.6858C33.5571 14.415 33.5635 14.1256 33.4905 13.8513Z"
-            fill="#CBD1D7"
-          />
-        </svg>
+          {{
+            !isDescribing && description.length === 0
+              ? "Describe your own"
+              : description
+          }}
+        </div>
       </div>
     </div>
     <div
@@ -204,7 +211,9 @@ import SwenBg from "./components/SwenBg.vue";
     </div>
     <div class="mt-[50px] pt-6 px-5 pb-8 bg-white rounded-t-[20px]">
       <div class="flex justify-between items-center">
-        <span class="text-black font-medium text-[15px]/[24px]">To pay 0€</span>
+        <span class="text-black font-medium text-[15px]/[24px]"
+          >To pay {{ amountEur }}€</span
+        >
         <span class="text-[#808191] font-medium text-[14px]/[20px]">
           Service fees 0€
         </span>
