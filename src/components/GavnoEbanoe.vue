@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+const props = defineProps<{ name: string }>();
+
 const isSelected = ref(false);
 </script>
 
@@ -10,16 +12,16 @@ const isSelected = ref(false);
     @click="isSelected = !isSelected"
   >
     <div
-      class="aspect-square rounded-[12px] w-full"
+      class="aspect-square rounded-[12px] w-full relative"
       :class="isSelected ? 'bg-[#9771FD]' : 'bg-white'"
     >
-      <img src="../assets/tag(2).svg" />
+      <slot />
     </div>
     <div
       class="font-medium text-[12px]/[20px]"
       :class="isSelected ? 'text-[#9771FD]' : 'text-[#808191]'"
     >
-      Service
+      {{ props.name }}
     </div>
   </div>
 </template>

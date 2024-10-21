@@ -166,10 +166,28 @@ const onAmountChange = (e: any) => {
           >What did you like?</span
         >
         <div class="flex flex-nowrap w-full gap-3">
-          <GavnoEbanoe />
-          <GavnoEbanoe />
-          <GavnoEbanoe />
-          <GavnoEbanoe />
+          <GavnoEbanoe name="Service">
+            <img
+              class="absolute top-0 left-1/2 -translate-x-1/2 w-full"
+              src="./assets/tag(2).svg"
+            />
+          </GavnoEbanoe>
+
+          <GavnoEbanoe name="Cleanliness"
+            ><img
+              class="absolute top-0 left-1/2 -translate-x-1/2 w-full"
+              src="./assets/tag(3).svg"
+          /></GavnoEbanoe>
+          <GavnoEbanoe name="Atmosphere"
+            ><img
+              class="absolute top-0 left-1/2 -translate-x-1/2 w-full"
+              src="./assets/tag(4).svg"
+          /></GavnoEbanoe>
+          <GavnoEbanoe name="Food quality"
+            ><img
+              class="absolute top-0 left-1/2 -translate-x-1/2 w-full"
+              src="./assets/tag(5).svg"
+          /></GavnoEbanoe>
         </div>
       </div>
       <div class="flex flex-col gap-3 items-center">
