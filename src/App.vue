@@ -64,7 +64,7 @@ import SwenBg from "./components/SwenBg.vue";
   <main>
     <div>
       <div class="mt-4 mb-5 flex justify-between items-center">
-        <div>
+        <div class="rounded-r-full overflow-hidden">
           <img src="./assets/left-waiter.jpg" />
         </div>
         <div class="flex items-center gap-3">
@@ -80,7 +80,7 @@ import SwenBg from "./components/SwenBg.vue";
             </div>
           </div>
         </div>
-        <div>
+        <div class="rounded-l-full overflow-hidden">
           <img src="./assets/right-waiter.jpg" />
         </div>
       </div>
@@ -119,7 +119,7 @@ import SwenBg from "./components/SwenBg.vue";
     <div class="pt-3 mx-5">
       <div class="flex items-center gap-2 flex-nowrap">
         <hr class="flex-grow flex-shrink border-[#9771FD]" />
-        <span class="text-[#9c95ca] font-medium text-[15px]/[24px]"
+        <span class="text-[#0F0A2F] font-medium text-[15px]/[24px]"
           >Rate your experience</span
         >
         <hr class="flex-grow flex-shrink border-[#9771FD]" />
@@ -241,7 +241,7 @@ import SwenBg from "./components/SwenBg.vue";
       <div
         class="flex justify-center items-center bg-[#9771FD] rounded-[40px] h-11 gap-[10px] text-white font-medium text-[16px]/[24px] mt-2"
       >
-        <span>Pay with</span>
+        <span>Pay with debit card</span>
       </div>
       <div
         class="mt-3 font-medium text-[#808191] text-[11px]/[15px] text-center"
