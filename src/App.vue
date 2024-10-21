@@ -22,6 +22,8 @@ const onAmountChange = (e: any) => {
   const asd = sspf.replace("€", "");
   amountEur.value = +asd;
 };
+
+const isDialogShown = ref(false);
 </script>
 
 <template>
@@ -57,7 +59,10 @@ const onAmountChange = (e: any) => {
         </svg>
       </div>
     </div>
-    <div class="h-11 relative overflow-hidden select-none cursor-pointer">
+    <div
+      class="h-11 relative overflow-hidden select-none cursor-pointer"
+      @click="isDialogShown = true"
+    >
       <SwenBg class="absolute top-0 mt-[-18%] left-0 w-[110%]" />
       <Vue3Marquee class="!h-11">
         <div class="relative flex h-6 items-center custom-shadow">
@@ -280,6 +285,17 @@ const onAmountChange = (e: any) => {
       </div>
     </div>
   </main>
+  <div
+    v-if="isDialogShown"
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[10000px] h-[10000px] bg-black/20 z-40"
+    @click="isDialogShown = false"
+  />
+  <div
+    v-if="isDialogShown"
+    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 bg-white rounded-[24px] p-[12px] gap-4 flex flex-col"
+  >
+    asd
+  </div>
 </template>
 
 <style scoped>
