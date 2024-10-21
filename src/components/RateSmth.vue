@@ -68,6 +68,7 @@ const emit = defineEmits<{
         :data-rate="i"
         @mouseenter="handleHover(i)"
         @mouseup="handleHover(i)"
+        @click="handleHover(i)"
       >
         <svg
           class="h-full w-full"
