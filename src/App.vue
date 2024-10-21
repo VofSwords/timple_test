@@ -8,7 +8,6 @@ import GavnoEbanoe from "./components/GavnoEbanoe.vue";
 
 const isDescribing = ref(false);
 const description = ref("");
-const log = (...arr: any[]) => console.log(...arr);
 const handleDescribe = (e: any) => {
   const target = e.target;
   const value = target.innerText;
