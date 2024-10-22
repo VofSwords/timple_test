@@ -69,7 +69,7 @@ const emit = defineEmits<{
         @mouseenter="handleHover(i)"
         @mouseup="handleHover(i)"
         @click="handleHover(i)"
-        @touchstart="handleHover(i)"
+        @touchend="handleHover(i)"
       >
         <svg
           class="h-full w-full"

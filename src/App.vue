@@ -15,12 +15,12 @@ const handleDescribe = (e: any) => {
   isDescribing.value = false;
 };
 
-const amountEur = ref(0);
-const asdd = computed(() => amountEur.value + "€");
+const asdd = ref("");
+const amountEur = computed(() => +asdd.value.replace("€", ""));
 const onAmountChange = (e: any) => {
   let sspf = e.target.value;
-  const asd = sspf.replace("€", "");
-  amountEur.value = +asd;
+  asdd.value = sspf.replace("€", "") + "€";
+  console.log(asdd.value);
 };
 
 const isDialogShown = ref(false);
@@ -116,15 +116,12 @@ const isDialogShown = ref(false);
           Enter amount of tips
         </span>
         <div class="flex justify-center absolute top-[41.53px] w-full">
-          <div class="flex-grow basis-full" />
-
           <input
-            class="flex-shrink basis-0 w-min font-bold text-[34px]/[36px] inline focus:outline-none text-center focus:text-[#0F0A2F] focus:opacity-100 placeholder:text-black placeholder:opacity-10"
+            class="flex-shrink basis-0 w-full flex-grow font-bold text-[34px]/[36px] inline focus:outline-none text-center focus:text-[#0F0A2F] focus:opacity-100 placeholder:text-black placeholder:opacity-10 focus:pointer-events-none"
             placeholder="0€"
             :value="amountEur > 0 ? asdd : ''"
             @input="onAmountChange"
           />
-          <div class="flex-grow" />
         </div>
       </div>
       <div class="mt-2 mx-5 flex flex-nowrap h-[34px] gap-1 items-stretch">
