@@ -121,6 +121,8 @@ const isDialogShown = ref(false);
             placeholder="0€"
             :value="amountEur > 0 ? asdd : ''"
             @input="onAmountChange"
+            pattern="[0-9]*"
+            inputmode="numeric"
           />
         </div>
       </div>
